@@ -8,9 +8,8 @@ $(document).ready(function(){
     $('#speichern').click(speichern);
     $('#upload').click(upload.php);
 
-  //  $('#erledigt').click(erledigt);
+   //  $('#erledigt').click(erledigt);
    // $('#erledigt').click(searchPosition());
-
 
 
    // $('#day').selected();             Erst datum auswählen dann reefresh laden der kunden
@@ -64,7 +63,6 @@ function speichern() {
        // $("#alterStand" + locationID).text(myLocations[locationID].alterStand);
         $("#alterStand" + locationID).text(standneu);
 
-
     }
    // var pos = locationID;
    // myLocations.alterStand = standneu;
@@ -84,8 +82,6 @@ locationID = 0
 Alert("Kunden wurden aktualisiert!");
 searchPosition();
 }  */
-
-
 
 
     function searchPosition() {
@@ -128,7 +124,7 @@ searchPosition();
                 //distance: Entfernung in km: distance = Math.sqrt(dx * dx + dy * dy);
 
 
-          dx = 71.5 * (currentLng - locationLng);
+            dx = 71.5 * (currentLng - locationLng);
             dy = 111.3 * (currentLat - locationLat);
 
             distance = Math.sqrt(dx * dx + dy * dy);
@@ -152,24 +148,21 @@ searchPosition();
             //alert(myLocations.entfernung);
 
 
-
            /* if (distance < nearestAttraction){
                 nearestAttraction = distance;
                 var strecke = [];
                 $(strecke).append(locationID)
                 locationID = i;
             }
-*/
+        */
             console.log('Distance ' + i + ': ' + distance);
-      /*      var entfernungen = [];
+        /*      var entfernungen = [];
             entfernungen[i]= nearestAttraction;
             //alert(entfernungen);
             entfernungen.sort(function (a,b) {
                 return b - a
             });
-*/
-
-
+        */
         }
 
         //Fuer Uebung 5c: Speichern der aktuellen Position und naechsten Attraktion im localStorage
@@ -184,29 +177,20 @@ searchPosition();
 
     }
 
-
 //Location anzeigen ohne Karte
-
 
 
     function showLocation(locationID, nearestAttraction, distance) {
 
-
-
-
-
-
         // Kunden auflisten:
 
-
           $("#liste2").empty();           //buttons funktionieren nach zurück nicht mehr!       PageKarte löschen!!!
-        locationID=0;
-        var anzahl = myLocations.length;
-        day = localStorage.getItem('selectedday');
+          locationID=0;
+          var anzahl = myLocations.length;
+          day = localStorage.getItem('selectedday');
 
-
-        myLocations.sort(function(a, b) {
-            return a.entfernung - b.entfernung;
+          myLocations.sort(function(a, b) {
+          return a.entfernung - b.entfernung;
         });
 
             for (locationID; locationID < anzahl; locationID++) {
@@ -249,8 +233,7 @@ searchPosition();
                     
                   //  $("#container" + locationID).append("<button data-role='button' id=\"saveLocationReview" + locationID + "\" data-icon='refresh'>Aktualisieren</button>");
                     
-                    
-                    
+                   
        /*              $("body ").append("<section data-role='page' id=\"page-karte" + locationID + "\" data-title='Stromzähler App - Details | page-attraktion'>\n" +
                         "                                <header data-role='header' data-theme='b'  >\n" +
                         "                                <h1>Route</h1>\n" +
@@ -272,20 +255,15 @@ searchPosition();
 
                         //   Bei dieser Version hat der Button komischerweise nicht funktioniert, deshalb für jede eigene Karte eine Seite angelegt
                         */
-
-
-                    
                     
                     //var neuid = "beschrLocationContentTop" + locationID;
                     //$("#beschrLocationContentTop").attr(id, neuid).text(myLocation.bezeichnung);
 
                     $("#beschrLocationContentTop" + locationID).text(myLocation.bezeichnung);
 
-
                     $("#entferungID" + locationID).text(nearestAttraction);
 
                     $("#KundenID" + locationID).text(myLocation.KundenID);
-
 
                     $("#adrLocation" + locationID).text(myLocation.adresse);
 
@@ -297,7 +275,6 @@ searchPosition();
                     $("#alterStand" + locationID).text(myLocation.alterStand);
 
                     localStorage.setItem('locationID', locationID);
-
 
                     var km = (Math.round(distance * 100) / 100);
 
@@ -324,11 +301,11 @@ searchPosition();
 
 */
 
-
                 /***************************************************************************/
                 /* TODO 5a.2: Aktuelle Entferung zu Attraktion auf 2 Stellen runden und */
                 /* an beschrLocationContent anfuegen                               */
                 /***************************************************************************/
+        
                 var km = (Math.round(nearestAttraction * 100) / 100);
 
                 $("#beschrLocationContentTop" + locationID).append("<p>Entfernung: " + km + " km</p>");
@@ -350,7 +327,6 @@ var map;
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -371,28 +347,18 @@ var map;
       //  lng: 10.660512
     //};
 
-
     var geocoder = new google.maps.Geocoder();
+
 
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
 
-
     map = new google.maps.Map(document.getElementById('karteAusgabe'),options );
-
-
-
-
-
 
     //----------------------------------------------------------------
     // TODO: 5c3.1 ICON FUER EIGENE POSITION DEFINIEREN
@@ -405,13 +371,9 @@ var map;
     });
 
 
-
-
-
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -442,9 +404,11 @@ var map;
         }
     });
 
+
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -473,7 +437,7 @@ var map;
     function showMap1() {
 
         //Werte fuer LocationID und aktueller Position aus localStorage laden
-       // locationID = localStorage.getItem('locationID');
+        //locationID = localStorage.getItem('locationID');
 
         locationID = localStorage.getItem('locationID');
         var myLocation = myLocations[locationID];
@@ -505,26 +469,18 @@ var map;
 
         var geocoder = new google.maps.Geocoder();
 
+        
         //----------------------------------------------------------------
         // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
         //----------------------------------------------------------------
 
-
-
         var options = {zoom: 10,
             center: currentPosition
-
-
         };
-
 
             map = new google.maps.Map(document.getElementById('karteAusgabe'),options );
 
-
-
-
-
-
+        
         //----------------------------------------------------------------
         // TODO: 5c3.1 ICON FUER EIGENE POSITION DEFINIEREN
         //----------------------------------------------------------------
@@ -536,13 +492,9 @@ var map;
         });
 
 
-
-
-
         //----------------------------------------------------------------
         // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
         //----------------------------------------------------------------
-
 
         var Kunde = myLocation.bezeichnung;
 
@@ -558,8 +510,6 @@ var map;
         bounds.extend(markerLocation.getPosition());
         map.fitBounds(bounds);
 
-
-
         // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
         geocoder.geocode({
             'latLng' : currentPosition
@@ -573,9 +523,11 @@ var map;
             }
         });
 
+        
         //----------------------------------------------------------------
         // Request für Navigation erstellen
         //----------------------------------------------------------------
+        
         var directionsService = new google.maps.DirectionsService();
 
          var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -612,7 +564,6 @@ function showMap2() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -636,26 +587,16 @@ function showMap2() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
 
-
-
        map = new google.maps.Map(document.getElementById('karteAusgabe2'),options );
-
-
-
-
-
 
     //----------------------------------------------------------------
     // TODO: 5c3.1 ICON FUER EIGENE POSITION DEFINIEREN
@@ -668,13 +609,9 @@ function showMap2() {
     });
 
 
-
-
-
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -690,8 +627,6 @@ function showMap2() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -705,9 +640,11 @@ function showMap2() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -736,7 +673,7 @@ function showMap2() {
 function showMap3() {
 
     //Werte fuer LocationID und aktueller Position aus localStorage laden
-    // locationID = localStorage.getItem('locationID');
+    //locationID = localStorage.getItem('locationID');
 
     locationID = localStorage.getItem('locationID');
     var myLocation = myLocations[locationID];
@@ -768,25 +705,16 @@ function showMap3() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
 
-
-
        map = new google.maps.Map(document.getElementById('karteAusgabe3'),options );
-
-
-
-
 
 
     //----------------------------------------------------------------
@@ -800,13 +728,9 @@ function showMap3() {
     });
 
 
-
-
-
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -822,8 +746,6 @@ function showMap3() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -837,9 +759,11 @@ function showMap3() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -876,7 +800,6 @@ function showMap4() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -900,27 +823,18 @@ function showMap4() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
-
-
 
     map = new google.maps.Map(document.getElementById('karteAusgabe4'),options );
 
-
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.1 ICON FUER EIGENE POSITION DEFINIEREN
     //----------------------------------------------------------------
@@ -932,13 +846,9 @@ function showMap4() {
     });
 
 
-
-
-
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -954,8 +864,6 @@ function showMap4() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -969,9 +877,11 @@ function showMap4() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -1032,25 +942,16 @@ function showMap5() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
 
-
-
     map = new google.maps.Map(document.getElementById('karteAusgabe5'),options );
-
-
-
-
 
 
     //----------------------------------------------------------------
@@ -1064,13 +965,9 @@ function showMap5() {
     });
 
 
-
-
-
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -1086,8 +983,6 @@ function showMap5() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -1101,9 +996,11 @@ function showMap5() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -1140,7 +1037,6 @@ function showMap6() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -1164,25 +1060,16 @@ function showMap6() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
 
-
-
     map = new google.maps.Map(document.getElementById('karteAusgabe6'),options );
-
-
-
-
 
 
     //----------------------------------------------------------------
@@ -1196,13 +1083,9 @@ function showMap6() {
     });
 
 
-
-
-
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -1218,8 +1101,6 @@ function showMap6() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -1233,9 +1114,11 @@ function showMap6() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -1272,7 +1155,6 @@ function showMap7() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -1296,25 +1178,16 @@ function showMap7() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
 
-
-
     map = new google.maps.Map(document.getElementById('karteAusgabe7'),options );
-
-
-
-
 
 
     //----------------------------------------------------------------
@@ -1327,14 +1200,10 @@ function showMap7() {
         title: "Hier sind Sie!"
     });
 
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -1350,8 +1219,6 @@ function showMap7() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -1365,9 +1232,11 @@ function showMap7() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -1404,7 +1273,6 @@ function showMap8() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -1428,27 +1296,18 @@ function showMap8() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
-
-
 
     map = new google.maps.Map(document.getElementById('karteAusgabe8'),options );
 
-
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.1 ICON FUER EIGENE POSITION DEFINIEREN
     //----------------------------------------------------------------
@@ -1459,14 +1318,10 @@ function showMap8() {
         title: "Hier sind Sie!"
     });
 
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -1482,8 +1337,6 @@ function showMap8() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -1497,9 +1350,11 @@ function showMap8() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -1536,7 +1391,6 @@ function showMap9() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -1560,25 +1414,16 @@ function showMap9() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
 
-
-
     map = new google.maps.Map(document.getElementById('karteAusgabe9'),options );
-
-
-
-
 
 
     //----------------------------------------------------------------
@@ -1592,13 +1437,9 @@ function showMap9() {
     });
 
 
-
-
-
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -1614,8 +1455,6 @@ function showMap9() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -1629,9 +1468,11 @@ function showMap9() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -1668,7 +1509,6 @@ function showMap10() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -1692,25 +1532,16 @@ function showMap10() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
 
-
-
     map = new google.maps.Map(document.getElementById('karteAusgabe10'),options );
-
-
-
-
 
 
     //----------------------------------------------------------------
@@ -1724,13 +1555,9 @@ function showMap10() {
     });
 
 
-
-
-
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -1746,8 +1573,6 @@ function showMap10() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -1761,9 +1586,11 @@ function showMap10() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -1800,7 +1627,6 @@ function showMap11() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -1824,11 +1650,10 @@ function showMap11() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
-
-
 
     var options = {zoom: 10,
         center: currentPosition
@@ -1836,13 +1661,7 @@ function showMap11() {
 
     };
 
-
-
     map = new google.maps.Map(document.getElementById('karteAusgabe11'),options );
-
-
-
-
 
 
     //----------------------------------------------------------------
@@ -1856,13 +1675,9 @@ function showMap11() {
     });
 
 
-
-
-
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -1878,8 +1693,6 @@ function showMap11() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -1893,9 +1706,11 @@ function showMap11() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -1932,7 +1747,6 @@ function showMap12() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -1956,25 +1770,16 @@ function showMap12() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
 
-
-
     map = new google.maps.Map(document.getElementById('karteAusgabe12'),options );
-
-
-
-
 
 
     //----------------------------------------------------------------
@@ -1988,13 +1793,9 @@ function showMap12() {
     });
 
 
-
-
-
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -2010,8 +1811,6 @@ function showMap12() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -2025,9 +1824,11 @@ function showMap12() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -2093,20 +1894,11 @@ function showMap13() {
     //----------------------------------------------------------------
 
 
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
 
-
-
     map = new google.maps.Map(document.getElementById('karteAusgabe13'),options );
-
-
-
-
 
 
     //----------------------------------------------------------------
@@ -2119,14 +1911,10 @@ function showMap13() {
         title: "Hier sind Sie!"
     });
 
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -2142,8 +1930,6 @@ function showMap13() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -2157,9 +1943,11 @@ function showMap13() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -2196,7 +1984,6 @@ function showMap14() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -2220,27 +2007,18 @@ function showMap14() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
-
-
 
     map = new google.maps.Map(document.getElementById('karteAusgabe14'),options );
 
-
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.1 ICON FUER EIGENE POSITION DEFINIEREN
     //----------------------------------------------------------------
@@ -2251,14 +2029,10 @@ function showMap14() {
         title: "Hier sind Sie!"
     });
 
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -2274,8 +2048,6 @@ function showMap14() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -2289,6 +2061,7 @@ function showMap14() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
@@ -2314,7 +2087,6 @@ function showMap14() {
             error("Directions failed due to: " + status);
         }
     });
-
 }
 
 function showMap15() {
@@ -2327,7 +2099,6 @@ function showMap15() {
 
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
-
 
     locationID = 0;
 
@@ -2352,27 +2123,18 @@ function showMap15() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
-
-
 
     map = new google.maps.Map(document.getElementById('karteAusgabe15'),options );
 
-
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.1 ICON FUER EIGENE POSITION DEFINIEREN
     //----------------------------------------------------------------
@@ -2383,14 +2145,10 @@ function showMap15() {
         title: "Hier sind Sie!"
     });
 
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -2406,8 +2164,6 @@ function showMap15() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -2421,9 +2177,11 @@ function showMap15() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -2460,7 +2218,6 @@ function showMap16() {
     latit = $("#latitude" + locationID).text(myLocation.latitude);
     longit = $("#longitude" + locationID).text(myLocation.longitude);
 
-
     locationID = 0;
 
     var currentLat = parseFloat(localStorage.getItem('currentLat'));
@@ -2484,27 +2241,18 @@ function showMap16() {
 
     var geocoder = new google.maps.Geocoder();
 
+    
     //----------------------------------------------------------------
     // TODO: 5c2. KARTE DARSTELLEN (im Div-Container mit der id=karteAusgabe)
     //----------------------------------------------------------------
 
-
-
     var options = {zoom: 10,
         center: currentPosition
-
-
     };
-
-
 
     map = new google.maps.Map(document.getElementById('karteAusgabe16'),options );
 
-
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.1 ICON FUER EIGENE POSITION DEFINIEREN
     //----------------------------------------------------------------
@@ -2515,14 +2263,10 @@ function showMap16() {
         title: "Hier sind Sie!"
     });
 
-
-
-
-
+    
     //----------------------------------------------------------------
     // TODO: 5c3.2 ICON FUER Kunden DEFINIEREN
     //----------------------------------------------------------------
-
 
     var Kunde = myLocation.bezeichnung;
 
@@ -2538,8 +2282,6 @@ function showMap16() {
     bounds.extend(markerLocation.getPosition());
     map.fitBounds(bounds);
 
-
-
     // Postalische Adresse der aktuellen Pos. ermitteln und darstellen
     geocoder.geocode({
         'latLng' : currentPosition
@@ -2553,9 +2295,11 @@ function showMap16() {
         }
     });
 
+    
     //----------------------------------------------------------------
     // Request für Navigation erstellen
     //----------------------------------------------------------------
+    
     var directionsService = new google.maps.DirectionsService();
 
     var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -2580,8 +2324,3 @@ function showMap16() {
     });
 
 }
-
-
-
-
-
